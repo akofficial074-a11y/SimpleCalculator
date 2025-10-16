@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple Calculator</title>
+</head>
+<body>
+  <h1>Simple Calculator</h1>
+  <input id="a" placeholder="Enter number A">
+  <select id="op">
+    <option value="add">+</option>
+    <option value="sub">-</option>
+    <option value="mul">*</option>
+    <option value="div">/</option>
+  </select>
+  <input id="b" placeholder="Enter number B">
+  <button id="calcBtn">Calculate</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    document.getElementById('calcBtn').onclick = async () => {
+      const a = document.getElementById('a').value;
+      const b = document.getElementById('b').value;
+      const op = document.getElementById('op').value;
+      const response = await fetch(`/calc?op=${op}&a=${a}&b=${b}`);
+      const text = await response.text();
+      document.getElementById('result').innerText = response.ok ? `Result: ${text}` : text;
+    };
+  </script>
+</body>
+</html>
